@@ -1,28 +1,27 @@
 <?php
+
 /**
- * @see https://github.com/zendframework/zend-exprsesive-authentication-zendauthentication
- *     for the canonical source repository
- * @copyright Copyright (c) 2017-2018 Zend Technologies USA Inc. (http://www.zend.com)
- * @license https://github.com/zendframework/zend-exprsesive-authentication-zendauthentication/blob/master/LICENSE.md
- *     New BSD License
+ * @see       https://github.com/mezzio/mezzio-authentication-laminasauthentication for the canonical source repository
+ * @copyright https://github.com/mezzio/mezzio-authentication-laminasauthentication/blob/master/COPYRIGHT.md
+ * @license   https://github.com/mezzio/mezzio-authentication-laminasauthentication/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Expressive\Authentication\Adapter;
+namespace MezzioTest\Authentication\Adapter;
 
+use Laminas\Authentication\Adapter\AbstractAdapter;
+use Laminas\Authentication\AuthenticationService;
+use Laminas\Authentication\Result;
+use Mezzio\Authentication\AuthenticationInterface;
+use Mezzio\Authentication\LaminasAuthentication\LaminasAuthentication;
+use Mezzio\Authentication\UserInterface;
+use Mezzio\Authentication\UserRepositoryInterface;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;
-use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use Zend\Authentication\Adapter\AbstractAdapter;
-use Zend\Authentication\AuthenticationService;
-use Zend\Authentication\Result;
-use Zend\Expressive\Authentication\AuthenticationInterface;
-use Zend\Expressive\Authentication\UserInterface;
-use Zend\Expressive\Authentication\UserRepositoryInterface;
-use Zend\Expressive\Authentication\ZendAuthentication\ZendAuthentication;
+use Psr\Http\Message\ServerRequestInterface;
 
-class ZendAuthenticationTest extends TestCase
+class LaminasAuthenticationTest extends TestCase
 {
     /** @var ServerRequestInterface|ObjectProphecy */
     private $request;
@@ -48,12 +47,12 @@ class ZendAuthenticationTest extends TestCase
 
     public function testConstructor()
     {
-        $zendAuthentication = new ZendAuthentication(
+        $laminasAuthentication = new LaminasAuthentication(
             $this->authService->reveal(),
             [],
             $this->responseFactory
         );
-        $this->assertInstanceOf(AuthenticationInterface::class, $zendAuthentication);
+        $this->assertInstanceOf(AuthenticationInterface::class, $laminasAuthentication);
     }
 
     public function testAuthenticateWithGetMethodAndIdentity()
@@ -62,12 +61,12 @@ class ZendAuthenticationTest extends TestCase
         $this->authService->hasIdentity()->willReturn(true);
         $this->authService->getIdentity()->willReturn('foo');
 
-        $zendAuthentication = new ZendAuthentication(
+        $laminasAuthentication = new LaminasAuthentication(
             $this->authService->reveal(),
             [],
             $this->responseFactory
         );
-        $result = $zendAuthentication->authenticate($this->request->reveal());
+        $result = $laminasAuthentication->authenticate($this->request->reveal());
         $this->assertInstanceOf(UserInterface::class, $result);
     }
 
@@ -76,12 +75,12 @@ class ZendAuthenticationTest extends TestCase
         $this->request->getMethod()->willReturn('GET');
         $this->authService->hasIdentity()->willReturn(false);
 
-        $zendAuthentication = new ZendAuthentication(
+        $laminasAuthentication = new LaminasAuthentication(
             $this->authService->reveal(),
             [],
             $this->responseFactory
         );
-        $this->assertNull($zendAuthentication->authenticate($this->request->reveal()));
+        $this->assertNull($laminasAuthentication->authenticate($this->request->reveal()));
     }
 
     public function testAuthenticateWithPostMethodAndNoParams()
@@ -89,12 +88,12 @@ class ZendAuthenticationTest extends TestCase
         $this->request->getMethod()->willReturn('POST');
         $this->request->getParsedBody()->willReturn([]);
 
-        $zendAuthentication = new ZendAuthentication(
+        $laminasAuthentication = new LaminasAuthentication(
             $this->authService->reveal(),
             [],
             $this->responseFactory
         );
-        $this->assertNull($zendAuthentication->authenticate($this->request->reveal()));
+        $this->assertNull($laminasAuthentication->authenticate($this->request->reveal()));
     }
 
     public function testAuthenticateWithPostMethodAndNoValidCredential()
@@ -118,12 +117,12 @@ class ZendAuthenticationTest extends TestCase
             ->authenticate()
             ->willReturn($result);
 
-        $zendAuthentication = new ZendAuthentication(
+        $laminasAuthentication = new LaminasAuthentication(
             $this->authService->reveal(),
             [],
             $this->responseFactory
         );
-        $this->assertNull($zendAuthentication->authenticate($this->request->reveal()));
+        $this->assertNull($laminasAuthentication->authenticate($this->request->reveal()));
     }
 
     public function testAuthenticateWithPostMethodAndValidCredential()
@@ -148,12 +147,12 @@ class ZendAuthenticationTest extends TestCase
             ->authenticate()
             ->willReturn($result);
 
-        $zendAuthentication = new ZendAuthentication(
+        $laminasAuthentication = new LaminasAuthentication(
             $this->authService->reveal(),
             [],
             $this->responseFactory
         );
-        $result = $zendAuthentication->authenticate($this->request->reveal());
+        $result = $laminasAuthentication->authenticate($this->request->reveal());
         $this->assertInstanceOf(UserInterface::class, $result);
     }
 }
