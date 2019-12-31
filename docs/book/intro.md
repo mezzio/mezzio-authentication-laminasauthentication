@@ -1,6 +1,6 @@
-# zend-expressive-authentication-zendauthentication
+# mezzio-authentication-laminasauthentication
 
-This component provides a [zend-authentication](https://docs.zendframework.com/zend-authentication)
-adapter for use with [zend-expressive-authentication](https://docs.zendframework.com/zend-expressive-authentication).
+This component provides a [laminas-authentication](https://docs.laminas.dev/laminas-authentication)
+adapter for use with [mezzio-authentication](https://docs.mezzio.dev/mezzio-authentication).
 
 Documentation forthcoming...

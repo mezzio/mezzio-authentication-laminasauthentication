@@ -1,24 +1,23 @@
 <?php
+
 /**
- * @see https://github.com/zendframework/zend-exprsesive-authentication-zendauthentication
- *     for the canonical source repository
- * @copyright Copyright (c) 2017-2018 Zend Technologies USA Inc. (http://www.zend.com)
- * @license https://github.com/zendframework/zend-exprsesive-authentication-zendauthentication/blob/master/LICENSE.md
- *     New BSD License
+ * @see       https://github.com/mezzio/mezzio-authentication-laminasauthentication for the canonical source repository
+ * @copyright https://github.com/mezzio/mezzio-authentication-laminasauthentication/blob/master/COPYRIGHT.md
+ * @license   https://github.com/mezzio/mezzio-authentication-laminasauthentication/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Expressive\Authentication\ZendAuthentication;
+namespace Mezzio\Authentication\LaminasAuthentication;
 
+use Laminas\Authentication\AuthenticationService;
+use Mezzio\Authentication\AuthenticationInterface;
+use Mezzio\Authentication\UserInterface;
+use Mezzio\Authentication\UserRepository\UserTrait;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Zend\Authentication\AuthenticationService;
-use Zend\Expressive\Authentication\AuthenticationInterface;
-use Zend\Expressive\Authentication\UserInterface;
-use Zend\Expressive\Authentication\UserRepository\UserTrait;
 
 use function strtoupper;
 
-class ZendAuthentication implements AuthenticationInterface
+class LaminasAuthentication implements AuthenticationInterface
 {
     use UserTrait;
 
