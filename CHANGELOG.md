@@ -28,7 +28,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- [#10](https://github.com/zendframework/zend-expressive-authentication-zendauthentication/pull/10)
+- [zendframework/zend-expressive-authentication-zendauthentication#10](https://github.com/zendframework/zend-expressive-authentication-zendauthentication/pull/10)
   adds PHP 7.3 support
 
 ### Changed
@@ -51,7 +51,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- [#9](https://github.com/zendframework/zend-expressive-authentication-zendauthentication/pull/9) updates the component to implement the zend-expressive-authentication 1.0 interfaces.
+- [zendframework/zend-expressive-authentication-zendauthentication#9](https://github.com/zendframework/zend-expressive-authentication-zendauthentication/pull/9) updates the component to implement the mezzio-authentication 1.0 interfaces.
 
 ### Changed
 
@@ -67,26 +67,26 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- [#7](https://github.com/zendframework/zend-expressive-authentication-zendauthentication/pull/7) avoids `initiateAuthentication` call on any forms with POST method behind authentication.
+- [zendframework/zend-expressive-authentication-zendauthentication#7](https://github.com/zendframework/zend-expressive-authentication-zendauthentication/pull/7) avoids `initiateAuthentication` call on any forms with POST method behind authentication.
 
 ## 0.4.0 - 2018-03-15
 
 ### Added
 
-- Adds support for zend-expressive-authentication 0.4.0 and up.
+- Adds support for mezzio-authentication 0.4.0 and up.
 
 ### Changed
 
-- [#5](https://github.com/zendframework/zend-expressive-authentication-zendauthentication/pull/5)
-  changes the constructor of the `Zend\Expressive\Authentication\ZendAuthentication\ZendAuthentication`
+- [zendframework/zend-expressive-authentication-zendauthentication#5](https://github.com/zendframework/zend-expressive-authentication-zendauthentication/pull/5)
+  changes the constructor of the `Mezzio\Authentication\LaminasAuthentication\LaminasAuthentication`
   class to accept a callable `$responseFactory` instead of a
   `Psr\Http\Message\ResponseInterface` response prototype. The
   `$responseFactory` should produce a `ResponseInterface` implementation when
   invoked.
 
-- [#5](https://github.com/zendframework/zend-expressive-authentication-zendauthentication/pull/5)
-  updates the `ZendAuthenticationFactory` to no longer use
-  `Zend\Expressive\Authentication\ResponsePrototypeTrait`, and instead always
+- [zendframework/zend-expressive-authentication-zendauthentication#5](https://github.com/zendframework/zend-expressive-authentication-zendauthentication/pull/5)
+  updates the `LaminasAuthenticationFactory` to no longer use
+  `Mezzio\Authentication\ResponsePrototypeTrait`, and instead always
   depend on the `Psr\Http\Message\ResponseInterface` service to correctly return
   a PHP callable capable of producing a `ResponseInterface` instance.
 
@@ -96,7 +96,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Removed
 
-- Removes support for releases of zend-expressive-authentication prior to 0.4.0.
+- Removes support for releases of mezzio-authentication prior to 0.4.0.
 
 ### Fixed
 
@@ -106,8 +106,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- [#3](https://github.com/zendframework/zend-expressive-authentication-zendauthentication/pull/3)
-  adds support for the 0.3 release of zend-expressive-authentication.
+- [zendframework/zend-expressive-authentication-zendauthentication#3](https://github.com/zendframework/zend-expressive-authentication-zendauthentication/pull/3)
+  adds support for the 0.3 release of mezzio-authentication.
 
 ### Changed
 
@@ -119,8 +119,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Removed
 
-- [#3](https://github.com/zendframework/zend-expressive-authentication-zendauthentication/pull/3)
-  removes support for the 0.2 release of zend-expressive-authentication.
+- [zendframework/zend-expressive-authentication-zendauthentication#3](https://github.com/zendframework/zend-expressive-authentication-zendauthentication/pull/3)
+  removes support for the 0.2 release of mezzio-authentication.
 
 ### Fixed
 
@@ -130,8 +130,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- [#1](https://github.com/zendframework/zend-expressive-authentication-zendauthentication/pull/1)
-  adds support for the 1.0.0-dev branch of zend-expressive-authentication.
+- [zendframework/zend-expressive-authentication-zendauthentication#1](https://github.com/zendframework/zend-expressive-authentication-zendauthentication/pull/1)
+  adds support for the 1.0.0-dev branch of mezzio-authentication.
 
 ### Changed
 
@@ -153,7 +153,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- Adds support for zend-expressive-authentication 0.2.0.
+- Adds support for mezzio-authentication 0.2.0.
 
 ### Changed
 
@@ -165,7 +165,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Removed
 
-- Adds support for zend-expressive-authentication 0.1.0.
+- Adds support for mezzio-authentication 0.1.0.
 
 ### Fixed
 
