@@ -1,30 +1,29 @@
 <?php
+
 /**
- * @see https://github.com/zendframework/zend-exprsesive-authentication-zendauthentication
- *     for the canonical source repository
- * @copyright Copyright (c) 2017-2018 Zend Technologies USA Inc. (http://www.zend.com)
- * @license https://github.com/zendframework/zend-exprsesive-authentication-zendauthentication/blob/master/LICENSE.md
- *     New BSD License
+ * @see       https://github.com/mezzio/mezzio-authentication-laminasauthentication for the canonical source repository
+ * @copyright https://github.com/mezzio/mezzio-authentication-laminasauthentication/blob/master/COPYRIGHT.md
+ * @license   https://github.com/mezzio/mezzio-authentication-laminasauthentication/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Expressive\Authentication\ZendAuthentication;
+namespace MezzioTest\Authentication\LaminasAuthentication;
 
+use Laminas\Authentication\AuthenticationService;
+use Mezzio\Authentication\Exception\InvalidConfigException;
+use Mezzio\Authentication\LaminasAuthentication\LaminasAuthentication;
+use Mezzio\Authentication\LaminasAuthentication\LaminasAuthenticationFactory;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
-use Zend\Authentication\AuthenticationService;
-use Zend\Expressive\Authentication\Exception\InvalidConfigException;
-use Zend\Expressive\Authentication\ZendAuthentication\ZendAuthentication;
-use Zend\Expressive\Authentication\ZendAuthentication\ZendAuthenticationFactory;
 
-class ZendAuthenticationFactoryTest extends TestCase
+class LaminasAuthenticationFactoryTest extends TestCase
 {
     /** @var ContainerInterface|ObjectProphecy */
     private $container;
 
-    /** @var ZendAuthentication */
+    /** @var LaminasAuthentication */
     private $factory;
 
     /** @var AuthenticationService|ObjectProphecy */
@@ -36,7 +35,7 @@ class ZendAuthenticationFactoryTest extends TestCase
     protected function setUp()
     {
         $this->container = $this->prophesize(ContainerInterface::class);
-        $this->factory = new ZendAuthenticationFactory();
+        $this->factory = new LaminasAuthenticationFactory();
         $this->authService = $this->prophesize(AuthenticationService::class);
         $this->responseFactory = function () {
             return $this->prophesize(ResponseInterface::class)->reveal();
@@ -91,7 +90,7 @@ class ZendAuthenticationFactoryTest extends TestCase
                 'authentication' => ['redirect' => '/login'],
             ]);
 
-        $zendAuthentication = ($this->factory)($this->container->reveal());
-        $this->assertInstanceOf(ZendAuthentication::class, $zendAuthentication);
+        $laminasAuthentication = ($this->factory)($this->container->reveal());
+        $this->assertInstanceOf(LaminasAuthentication::class, $laminasAuthentication);
     }
 }
