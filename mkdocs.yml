@@ -8,4 +8,3 @@ site_description: 'laminas-authentication adapter for mezzio-authentication.'
 repo_url: 'https://github.com/mezzio/mezzio-authentication-laminasauthentication'
 extra:
     project: Mezzio
-    project_url: 'https://docs.mezzio.dev'
