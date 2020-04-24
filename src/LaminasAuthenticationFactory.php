@@ -30,7 +30,7 @@ class LaminasAuthenticationFactory
 
         if (null === $auth) {
             throw new Exception\InvalidConfigException(sprintf(
-                "The %s service is missing",
+                'The %s service is missing',
                 AuthenticationService::class
             ));
         }
@@ -55,7 +55,9 @@ class LaminasAuthenticationFactory
             $auth,
             $config,
             $container->get(ResponseInterface::class),
-            $container->has(UserInterface::class) ? $container->get(UserInterface::class) : $container->get(\Zend\Expressive\Authentication\UserInterface::class)
+            $container->has(UserInterface::class)
+                ? $container->get(UserInterface::class)
+                : $container->get(\Zend\Expressive\Authentication\UserInterface::class)
         );
     }
 }
