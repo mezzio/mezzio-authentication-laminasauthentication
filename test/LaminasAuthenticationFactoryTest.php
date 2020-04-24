@@ -125,8 +125,10 @@ class LaminasAuthenticationFactoryTest extends TestCase
         $this->assertResponseFactoryReturns($this->responsePrototype->reveal(), $laminasAuthentication);
     }
 
-    public static function assertResponseFactoryReturns(ResponseInterface $expected, LaminasAuthentication $service) : void
-    {
+    public static function assertResponseFactoryReturns(
+        ResponseInterface $expected,
+        LaminasAuthentication $service
+    ) : void {
         $r = new ReflectionProperty($service, 'responseFactory');
         $r->setAccessible(true);
         $responseFactory = $r->getValue($service);
