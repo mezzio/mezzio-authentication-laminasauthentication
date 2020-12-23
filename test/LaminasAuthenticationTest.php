@@ -17,12 +17,15 @@ use Mezzio\Authentication\AuthenticationInterface;
 use Mezzio\Authentication\LaminasAuthentication\LaminasAuthentication;
 use Mezzio\Authentication\UserInterface;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 class LaminasAuthenticationTest extends TestCase
 {
+    use ProphecyTrait;
+
     /** @var ServerRequestInterface|ObjectProphecy */
     private $request;
 
@@ -41,7 +44,7 @@ class LaminasAuthenticationTest extends TestCase
     /** @var UserInterface|ObjectProphecy */
     private $userPrototype;
 
-    protected function setUp()
+    public function setUp(): void
     {
         $this->request = $this->prophesize(ServerRequestInterface::class);
         $this->authService = $this->prophesize(AuthenticationService::class);
