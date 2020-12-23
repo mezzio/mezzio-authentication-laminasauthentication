@@ -21,9 +21,12 @@ use Prophecy\Prophecy\ObjectProphecy;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use ReflectionProperty;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 class LaminasAuthenticationFactoryTest extends TestCase
 {
+    use ProphecyTrait;
+
     /** @var ContainerInterface|ObjectProphecy */
     private $container;
 
@@ -45,7 +48,7 @@ class LaminasAuthenticationFactoryTest extends TestCase
     /** @var callable */
     private $userFactory;
 
-    protected function setUp()
+    public function setUp(): void
     {
         $this->container = $this->prophesize(ContainerInterface::class);
         $this->factory = new LaminasAuthenticationFactory();
