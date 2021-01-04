@@ -45,7 +45,7 @@ install:
   - stty cols 120 && composer show
 
 script:
-  - if [[ $TEST_COVERAGE == 'true' ]]; then XDEBUG_MODE=coverage composer test-coverage ; else composer test ; fi
+  - if [[ $TEST_COVERAGE == 'true' ]]; then composer test-coverage ; else composer test ; fi
   - if [[ $CS_CHECK == 'true' ]]; then composer cs-check ; fi
 
 after_script:
