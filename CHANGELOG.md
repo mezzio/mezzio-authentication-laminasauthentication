@@ -2,27 +2,26 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 1.1.0 - TBD
+## 1.1.0 - 2021-01-10
 
 ### Added
 
 - [#6](https://github.com/mezzio/mezzio-authentication-laminasauthentication/pull/6) Adds PHP 8.0 support
 
-### Changed
 
-- Nothing.
+-----
 
-### Deprecated
+### Release Notes for [1.1.0](https://github.com/mezzio/mezzio-authentication-laminasauthentication/milestone/1)
 
-- Nothing.
 
-### Removed
 
-- Nothing.
+### 1.1.0
 
-### Fixed
+- Total issues resolved: **0**
+- Total pull requests resolved: **1**
+- Total contributors: **1**
 
-- Nothing.
+ - [6: Added PHP 8.0 Support](https://github.com/mezzio/mezzio-authentication-laminasauthentication/pull/6) thanks to @delassiter
 
 ## 1.0.1 - 2019-06-18
 
