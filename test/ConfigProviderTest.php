@@ -11,11 +11,12 @@ declare(strict_types=1);
 namespace MezzioTest\Authentication\LaminasAuthentication;
 
 use Mezzio\Authentication\LaminasAuthentication\ConfigProvider;
+use PHPUnit\Framework\Constraint\IsType;
 use PHPUnit\Framework\TestCase;
 
 class ConfigProviderTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         $this->provider = new ConfigProvider();
     }
@@ -43,5 +44,14 @@ class ConfigProviderTest extends TestCase
     {
         $this->assertArrayHasKey('authentication', $config);
         $this->assertInternalType('array', $config['authentication']);
+    }
+
+    private static function assertInternalType(string $expected, $actual, string $message = ''): void
+    {
+        static::assertThat(
+            $actual,
+            new IsType($expected),
+            $message
+        );
     }
 }
