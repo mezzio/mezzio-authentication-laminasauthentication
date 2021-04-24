@@ -1,10 +1,12 @@
 <?php
 
+// @codingStandardsIgnoreStart
 /**
  * @see       https://github.com/mezzio/mezzio-authentication-laminasauthentication for the canonical source repository
  * @copyright https://github.com/mezzio/mezzio-authentication-laminasauthentication/blob/master/COPYRIGHT.md
  * @license   https://github.com/mezzio/mezzio-authentication-laminasauthentication/blob/master/LICENSE.md New BSD License
  */
+// @codingStandardsIgnoreEnd
 
 declare(strict_types=1);
 
