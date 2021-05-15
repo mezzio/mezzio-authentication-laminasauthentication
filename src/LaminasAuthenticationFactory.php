@@ -1,13 +1,5 @@
 <?php
 
-// @codingStandardsIgnoreStart
-/**
- * @see       https://github.com/mezzio/mezzio-authentication-laminasauthentication for the canonical source repository
- * @copyright https://github.com/mezzio/mezzio-authentication-laminasauthentication/blob/master/COPYRIGHT.md
- * @license   https://github.com/mezzio/mezzio-authentication-laminasauthentication/blob/master/LICENSE.md New BSD License
- */
-// @codingStandardsIgnoreEnd
-
 declare(strict_types=1);
 
 namespace Mezzio\Authentication\LaminasAuthentication;
@@ -22,7 +14,7 @@ use function sprintf;
 
 class LaminasAuthenticationFactory
 {
-    public function __invoke(ContainerInterface $container) : LaminasAuthentication
+    public function __invoke(ContainerInterface $container): LaminasAuthentication
     {
         $auth = $container->has(AuthenticationService::class)
             ? $container->get(AuthenticationService::class)
@@ -45,7 +37,8 @@ class LaminasAuthenticationFactory
             );
         }
 
-        if (! $container->has(UserInterface::class)
+        if (
+            ! $container->has(UserInterface::class)
             && ! $container->has(\Zend\Expressive\Authentication\UserInterface::class)
         ) {
             throw new Exception\InvalidConfigException(

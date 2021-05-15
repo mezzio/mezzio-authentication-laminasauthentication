@@ -1,13 +1,5 @@
 <?php
 
-// @codingStandardsIgnoreStart
-/**
- * @see       https://github.com/mezzio/mezzio-authentication-laminasauthentication for the canonical source repository
- * @copyright https://github.com/mezzio/mezzio-authentication-laminasauthentication/blob/master/COPYRIGHT.md
- * @license   https://github.com/mezzio/mezzio-authentication-laminasauthentication/blob/master/LICENSE.md New BSD License
- */
-// @codingStandardsIgnoreEnd
-
 declare(strict_types=1);
 
 namespace MezzioTest\Authentication\LaminasAuthentication;
@@ -23,7 +15,7 @@ class ConfigProviderTest extends TestCase
         $this->provider = new ConfigProvider();
     }
 
-    public function testInvocationReturnsArray()
+    public function testInvocationReturnsArray(): array
     {
         $config = ($this->provider)();
         $this->assertInternalType('array', $config);
@@ -48,6 +40,7 @@ class ConfigProviderTest extends TestCase
         $this->assertInternalType('array', $config['authentication']);
     }
 
+    /** @param mixed $actual */
     private static function assertInternalType(string $expected, $actual, string $message = ''): void
     {
         static::assertThat(
