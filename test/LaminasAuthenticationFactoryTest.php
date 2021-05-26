@@ -1,13 +1,5 @@
 <?php
 
-// @codingStandardsIgnoreStart
-/**
- * @see       https://github.com/mezzio/mezzio-authentication-laminasauthentication for the canonical source repository
- * @copyright https://github.com/mezzio/mezzio-authentication-laminasauthentication/blob/master/COPYRIGHT.md
- * @license   https://github.com/mezzio/mezzio-authentication-laminasauthentication/blob/master/LICENSE.md New BSD License
- */
-// @codingStandardsIgnoreEnd
-
 declare(strict_types=1);
 
 namespace MezzioTest\Authentication\LaminasAuthentication;
@@ -19,11 +11,11 @@ use Mezzio\Authentication\LaminasAuthentication\LaminasAuthenticationFactory;
 use Mezzio\Authentication\UserInterface;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use ReflectionProperty;
-use Prophecy\PhpUnit\ProphecyTrait;
 
 class LaminasAuthenticationFactoryTest extends TestCase
 {
@@ -52,15 +44,15 @@ class LaminasAuthenticationFactoryTest extends TestCase
 
     public function setUp(): void
     {
-        $this->container = $this->prophesize(ContainerInterface::class);
-        $this->factory = new LaminasAuthenticationFactory();
-        $this->authService = $this->prophesize(AuthenticationService::class);
+        $this->container         = $this->prophesize(ContainerInterface::class);
+        $this->factory           = new LaminasAuthenticationFactory();
+        $this->authService       = $this->prophesize(AuthenticationService::class);
         $this->responsePrototype = $this->prophesize(ResponseInterface::class);
-        $this->responseFactory = function () {
+        $this->responseFactory   = function () {
             return $this->responsePrototype->reveal();
         };
-        $this->userPrototype = $this->prophesize(UserInterface::class);
-        $this->userFactory = function () {
+        $this->userPrototype     = $this->prophesize(UserInterface::class);
+        $this->userFactory       = function () {
             return $this->userPrototype->reveal();
         };
     }
@@ -133,7 +125,7 @@ class LaminasAuthenticationFactoryTest extends TestCase
     public static function assertResponseFactoryReturns(
         ResponseInterface $expected,
         LaminasAuthentication $service
-    ) : void {
+    ): void {
         $r = new ReflectionProperty($service, 'responseFactory');
         $r->setAccessible(true);
         $responseFactory = $r->getValue($service);

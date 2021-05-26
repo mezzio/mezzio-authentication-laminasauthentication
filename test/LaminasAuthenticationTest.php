@@ -1,13 +1,5 @@
 <?php
 
-// @codingStandardsIgnoreStart
-/**
- * @see       https://github.com/mezzio/mezzio-authentication-laminasauthentication for the canonical source repository
- * @copyright https://github.com/mezzio/mezzio-authentication-laminasauthentication/blob/master/COPYRIGHT.md
- * @license   https://github.com/mezzio/mezzio-authentication-laminasauthentication/blob/master/LICENSE.md New BSD License
- */
-// @codingStandardsIgnoreEnd
-
 declare(strict_types=1);
 
 namespace MezzioTest\Authentication\Adapter;
@@ -34,9 +26,6 @@ class LaminasAuthenticationTest extends TestCase
     /** @var AuthenticationService|ObjectProphecy */
     private $authService;
 
-    /** @var UserInterface|ObjectProphecy */
-    private $authenticatedUser;
-
     /** @var callable */
     private $responseFactory;
 
@@ -48,14 +37,13 @@ class LaminasAuthenticationTest extends TestCase
 
     public function setUp(): void
     {
-        $this->request = $this->prophesize(ServerRequestInterface::class);
-        $this->authService = $this->prophesize(AuthenticationService::class);
-        $this->authenticatedUser = $this->prophesize(UserInterface::class);
+        $this->request         = $this->prophesize(ServerRequestInterface::class);
+        $this->authService     = $this->prophesize(AuthenticationService::class);
         $this->responseFactory = function () {
             return $this->prophesize(ResponseInterface::class)->reveal();
         };
-        $this->userPrototype = $this->prophesize(UserInterface::class);
-        $this->userFactory = function () {
+        $this->userPrototype   = $this->prophesize(UserInterface::class);
+        $this->userFactory     = function () {
             return $this->userPrototype->reveal();
         };
     }
@@ -83,7 +71,7 @@ class LaminasAuthenticationTest extends TestCase
             $this->responseFactory,
             $this->userFactory
         );
-        $result = $laminasAuthentication->authenticate($this->request->reveal());
+        $result                = $laminasAuthentication->authenticate($this->request->reveal());
         $this->assertInstanceOf(UserInterface::class, $result);
     }
 
@@ -179,7 +167,7 @@ class LaminasAuthenticationTest extends TestCase
             $this->responseFactory,
             $this->userFactory
         );
-        $result = $laminasAuthentication->authenticate($this->request->reveal());
+        $result                = $laminasAuthentication->authenticate($this->request->reveal());
         $this->assertInstanceOf(UserInterface::class, $result);
     }
 
@@ -215,7 +203,7 @@ class LaminasAuthenticationTest extends TestCase
             $this->responseFactory,
             $this->userFactory
         );
-        $identity = $laminasAuthentication->authenticate($this->request->reveal());
+        $identity              = $laminasAuthentication->authenticate($this->request->reveal());
         $this->assertInstanceOf(UserInterface::class, $identity);
         $this->assertEquals('string', $identity->getIdentity());
     }

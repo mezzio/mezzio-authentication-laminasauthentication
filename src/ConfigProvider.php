@@ -1,39 +1,31 @@
 <?php
 
-// @codingStandardsIgnoreStart
-/**
- * @see       https://github.com/mezzio/mezzio-authentication-laminasauthentication for the canonical source repository
- * @copyright https://github.com/mezzio/mezzio-authentication-laminasauthentication/blob/master/COPYRIGHT.md
- * @license   https://github.com/mezzio/mezzio-authentication-laminasauthentication/blob/master/LICENSE.md New BSD License
- */
-// @codingStandardsIgnoreEnd
-
 declare(strict_types=1);
 
 namespace Mezzio\Authentication\LaminasAuthentication;
 
 class ConfigProvider
 {
-    public function __invoke() : array
+    public function __invoke(): array
     {
         return [
             'authentication' => $this->getAuthenticationConfig(),
-            'dependencies' => $this->getDependencies(),
+            'dependencies'   => $this->getDependencies(),
         ];
     }
 
-    public function getAuthenticationConfig() : array
+    public function getAuthenticationConfig(): array
     {
         return [
             'redirect' => '', // URL to which to redirect for invalid credentials
         ];
     }
 
-    public function getDependencies() : array
+    public function getDependencies(): array
     {
         return [
             // Legacy Zend Framework aliases
-            'aliases' => [
+            'aliases'   => [
                 // @codingStandardsIgnoreStart
                 \Zend\Expressive\Authentication\ZendAuthentication\ZendAuthentication::class => LaminasAuthentication::class,
                 // @codingStandardsIgnoreEnd

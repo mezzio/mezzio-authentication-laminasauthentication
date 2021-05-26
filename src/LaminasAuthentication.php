@@ -1,13 +1,5 @@
 <?php
 
-// @codingStandardsIgnoreStart
-/**
- * @see       https://github.com/mezzio/mezzio-authentication-laminasauthentication for the canonical source repository
- * @copyright https://github.com/mezzio/mezzio-authentication-laminasauthentication/blob/master/COPYRIGHT.md
- * @license   https://github.com/mezzio/mezzio-authentication-laminasauthentication/blob/master/LICENSE.md New BSD License
- */
-// @codingStandardsIgnoreEnd
-
 declare(strict_types=1);
 
 namespace Mezzio\Authentication\LaminasAuthentication;
@@ -22,24 +14,16 @@ use function strtoupper;
 
 class LaminasAuthentication implements AuthenticationInterface
 {
-    /**
-     * @var AuthenticationService
-     */
+    /** @var AuthenticationService */
     protected $auth;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $config;
 
-    /**
-     * @var callable
-     */
+    /** @var callable */
     protected $responseFactory;
 
-    /**
-     * @var callable
-     */
+    /** @var callable */
     protected $userFactory;
 
     public function __construct(
@@ -48,11 +32,11 @@ class LaminasAuthentication implements AuthenticationInterface
         callable $responseFactory,
         callable $userFactory
     ) {
-        $this->auth = $auth;
+        $this->auth   = $auth;
         $this->config = $config;
 
         // Ensures type safety of the composed factory
-        $this->responseFactory = function () use ($responseFactory) : ResponseInterface {
+        $this->responseFactory = function () use ($responseFactory): ResponseInterface {
             return $responseFactory();
         };
 
@@ -61,12 +45,12 @@ class LaminasAuthentication implements AuthenticationInterface
             string $identity,
             array $roles = [],
             array $details = []
-        ) use ($userFactory) : UserInterface {
+        ) use ($userFactory): UserInterface {
             return $userFactory($identity, $roles, $details);
         };
     }
 
-    public function authenticate(ServerRequestInterface $request) : ?UserInterface
+    public function authenticate(ServerRequestInterface $request): ?UserInterface
     {
         if (! $this->auth->hasIdentity()) {
             if ('POST' === strtoupper($request->getMethod())) {
@@ -78,7 +62,7 @@ class LaminasAuthentication implements AuthenticationInterface
         return ($this->userFactory)($this->auth->getIdentity());
     }
 
-    public function unauthorizedResponse(ServerRequestInterface $request) : ResponseInterface
+    public function unauthorizedResponse(ServerRequestInterface $request): ResponseInterface
     {
         return ($this->responseFactory)()
             ->withHeader(
@@ -88,9 +72,9 @@ class LaminasAuthentication implements AuthenticationInterface
             ->withStatus(301);
     }
 
-    private function initiateAuthentication(ServerRequestInterface $request) : ?UserInterface
+    private function initiateAuthentication(ServerRequestInterface $request): ?UserInterface
     {
-        $params = $request->getParsedBody();
+        $params   = $request->getParsedBody();
         $username = $this->config['username'] ?? 'username';
         $password = $this->config['password'] ?? 'password';
 
