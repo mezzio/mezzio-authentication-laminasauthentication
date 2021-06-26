@@ -35,7 +35,9 @@
     "require-dev": {
         "laminas/laminas-coding-standard": "~1.0.0",
         "phpspec/prophecy-phpunit": "^2.0",
-        "phpunit/phpunit": "^9.5"
+        "phpunit/phpunit": "^9.5",
+        "psalm/plugin-phpunit": "^0.16.1",
+        "vimeo/psalm": "^4.8"
     },
     "autoload": {
         "psr-4": {
