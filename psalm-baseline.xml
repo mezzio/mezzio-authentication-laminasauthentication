@@ -26,17 +26,6 @@
       <code>$config</code>
     </PossiblyInvalidArgument>
   </file>
-  <file src="test/ConfigProviderTest.php">
-    <MixedAssignment occurrences="1">
-      <code>$config</code>
-    </MixedAssignment>
-    <MixedFunctionCall occurrences="1">
-      <code>($this-&gt;provider)()</code>
-    </MixedFunctionCall>
-    <UndefinedThisPropertyFetch occurrences="1">
-      <code>$this-&gt;provider</code>
-    </UndefinedThisPropertyFetch>
-  </file>
   <file src="test/LaminasAuthenticationFactoryTest.php">
     <InvalidFunctionCall occurrences="3">
       <code>($this-&gt;factory)($this-&gt;container-&gt;reveal())</code>

@@ -19,6 +19,9 @@ use PHPUnit\Framework\TestCase;
  */
 class ConfigProviderTest extends TestCase
 {
+    /** @var ConfigProvider*/
+    private $provider;
+
     /**
      * @psalm-suppress UndefinedThisPropertyAssignment
      */
