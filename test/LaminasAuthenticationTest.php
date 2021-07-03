@@ -22,6 +22,9 @@ use Prophecy\Prophecy\ObjectProphecy;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
+/**
+ * @psalm-suppress MissingConstructor
+ */
 class LaminasAuthenticationTest extends TestCase
 {
     use ProphecyTrait;
@@ -44,6 +47,10 @@ class LaminasAuthenticationTest extends TestCase
     /** @var UserInterface|ObjectProphecy */
     private $userPrototype;
 
+    /**
+     * @psalm-suppress MissingClosureReturnType
+     * @psalm-suppress PossiblyUndefinedMethod
+     */
     public function setUp(): void
     {
         $this->request = $this->prophesize(ServerRequestInterface::class);
@@ -58,6 +65,11 @@ class LaminasAuthenticationTest extends TestCase
         };
     }
 
+    /**
+     * @psalm-suppress MissingReturnType
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress PossiblyUndefinedMethod
+     */
     public function testConstructor()
     {
         $laminasAuthentication = new LaminasAuthentication(
@@ -69,6 +81,14 @@ class LaminasAuthenticationTest extends TestCase
         $this->assertInstanceOf(AuthenticationInterface::class, $laminasAuthentication);
     }
 
+    /**
+     * @psalm-suppress MissingReturnType
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedMethodCall
+     * @psalm-suppress PossiblyUndefinedMethod
+     * @psalm-suppress PossiblyInvalidMethodCall
+     * @psalm-suppress PossiblyNullReference
+     */
     public function testAuthenticateWithGetMethodAndIdentity()
     {
         $this->request->getMethod()->willReturn('GET');
@@ -85,6 +105,12 @@ class LaminasAuthenticationTest extends TestCase
         $this->assertInstanceOf(UserInterface::class, $result);
     }
 
+    /**
+     * @psalm-suppress MissingReturnType
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress PossiblyInvalidMethodCall
+     * @psalm-suppress PossiblyUndefinedMethod
+     */
     public function testAuthenticateWithGetMethodAndNoIdentity()
     {
         $this->request->getMethod()->willReturn('GET');
@@ -99,6 +125,14 @@ class LaminasAuthenticationTest extends TestCase
         $this->assertNull($laminasAuthentication->authenticate($this->request->reveal()));
     }
 
+    /**
+     * @psalm-suppress MissingReturnType
+     * @psalm-suppress MixedMethodCall
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress PossiblyInvalidMethodCall
+     * @psalm-suppress PossiblyNullReference
+     * @psalm-suppress PossiblyUndefinedMethod
+     */
     public function testAuthenticateWithPostMethodAndNoParams()
     {
         $this->request->getMethod()->willReturn('POST');
@@ -113,6 +147,14 @@ class LaminasAuthenticationTest extends TestCase
         $this->assertNull($laminasAuthentication->authenticate($this->request->reveal()));
     }
 
+    /**
+     * @psalm-suppress MissingReturnType
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedMethodCall
+     * @psalm-suppress PossiblyInvalidMethodCall
+     * @psalm-suppress PossiblyNullReference
+     * @psalm-suppress PossiblyUndefinedMethod
+     */
     public function testAuthenticateWithPostMethodAndNoValidCredential()
     {
         //not authenticated
@@ -146,6 +188,14 @@ class LaminasAuthenticationTest extends TestCase
         $this->assertNull($laminasAuthentication->authenticate($this->request->reveal()));
     }
 
+    /**
+     * @psalm-suppress MissingReturnType
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedMethodCall
+     * @psalm-suppress PossiblyInvalidMethodCall
+     * @psalm-suppress PossiblyNullReference
+     * @psalm-suppress PossiblyUndefinedMethod
+     */
     public function testAuthenticateWithPostMethodAndValidCredential()
     {
         //not authenticated
@@ -181,6 +231,14 @@ class LaminasAuthenticationTest extends TestCase
         $this->assertInstanceOf(UserInterface::class, $result);
     }
 
+    /**
+     * @psalm-suppress MissingReturnType
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedMethodCall
+     * @psalm-suppress PossiblyInvalidMethodCall
+     * @psalm-suppress PossiblyNullReference
+     * @psalm-suppress PossiblyUndefinedMethod
+     */
     public function testAuthenticateWithPostMethodAndNoValidCredentialAndAlreadyAuthenticated()
     {
         $this->authService->hasIdentity()->willReturn(true);
@@ -218,6 +276,14 @@ class LaminasAuthenticationTest extends TestCase
         $this->assertEquals('string', $identity->getIdentity());
     }
 
+    /**
+     * @psalm-suppress MissingReturnType
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedMethodCall
+     * @psalm-suppress PossiblyInvalidMethodCall
+     * @psalm-suppress PossiblyNullReference
+     * @psalm-suppress PossiblyUndefinedMethod
+     */
     public function testAuthenticateWithPostMethodAndValidCredentialAndAlreadyAuthenticated()
     {
         $this->authService->hasIdentity()->willReturn(true);
