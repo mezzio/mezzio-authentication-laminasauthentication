@@ -1,31 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <files psalm-version="4.8.1@f73f2299dbc59a3e6c4d66cff4605176e728ee69">
-  <file src="src/LaminasAuthentication.php">
-    <MixedMethodCall occurrences="2">
-      <code>withHeader</code>
-      <code>withStatus</code>
-    </MixedMethodCall>
-    <PossiblyNullReference occurrences="2">
-      <code>setCredential</code>
-      <code>setIdentity</code>
-    </PossiblyNullReference>
-    <UndefinedInterfaceMethod occurrences="2">
-      <code>setCredential</code>
-      <code>setIdentity</code>
-    </UndefinedInterfaceMethod>
-  </file>
-  <file src="src/LaminasAuthenticationFactory.php">
-    <MixedArgument occurrences="3">
-      <code>$auth</code>
-      <code>$container-&gt;get(ResponseInterface::class)</code>
-    </MixedArgument>
-    <MixedAssignment occurrences="1">
-      <code>$auth</code>
-    </MixedAssignment>
-    <PossiblyInvalidArgument occurrences="1">
-      <code>$config</code>
-    </PossiblyInvalidArgument>
-  </file>
   <file src="test/LaminasAuthenticationFactoryTest.php">
     <InvalidPropertyAssignmentValue occurrences="1">
       <code>new LaminasAuthenticationFactory()</code>

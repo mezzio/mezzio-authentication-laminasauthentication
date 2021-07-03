@@ -20,6 +20,11 @@ use function sprintf;
 
 class LaminasAuthenticationFactory
 {
+    /**
+     * @psalm-suppress MixedAssignment
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress PossiblyInvalidArgument
+     */
     public function __invoke(ContainerInterface $container) : LaminasAuthentication
     {
         $auth = $container->has(AuthenticationService::class)

@@ -78,6 +78,9 @@ class LaminasAuthentication implements AuthenticationInterface
         return ($this->userFactory)($this->auth->getIdentity());
     }
 
+    /**
+     * @psalm-suppress MixedMethodCall
+     */
     public function unauthorizedResponse(ServerRequestInterface $request) : ResponseInterface
     {
         /** @var ResponseInterface */
@@ -89,6 +92,10 @@ class LaminasAuthentication implements AuthenticationInterface
             ->withStatus(301);
     }
 
+    /**
+     * @psalm-suppress PossiblyNullReference
+     * @psalm-suppress UndefinedInterfaceMethod
+     */
     private function initiateAuthentication(ServerRequestInterface $request) : ?UserInterface
     {
         $params = $request->getParsedBody();
