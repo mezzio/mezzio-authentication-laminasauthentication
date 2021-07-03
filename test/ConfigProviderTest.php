@@ -13,6 +13,9 @@ use PHPUnit\Framework\TestCase;
  */
 class ConfigProviderTest extends TestCase
 {
+    /** @var ConfigProvider */
+    private $provider;
+
     /**
      * @psalm-suppress UndefinedThisPropertyAssignment
      */
@@ -30,9 +33,8 @@ class ConfigProviderTest extends TestCase
 
     /**
      * @depends testInvocationReturnsArray
-     * @psalm-suppress MissingReturnType
      */
-    public function testReturnedArrayContainsDependencies(array $config)
+    public function testReturnedArrayContainsDependencies(array $config): void
     {
         $this->assertArrayHasKey('dependencies', $config);
         $this->assertInternalType('array', $config['dependencies']);
@@ -40,9 +42,8 @@ class ConfigProviderTest extends TestCase
 
     /**
      * @depends testInvocationReturnsArray
-     * @psalm-suppress MissingReturnType
      */
-    public function testReturnedArrayContainsAuthenticationConfig(array $config)
+    public function testReturnedArrayContainsAuthenticationConfig(array $config): void
     {
         $this->assertArrayHasKey('authentication', $config);
         $this->assertInternalType('array', $config['authentication']);
