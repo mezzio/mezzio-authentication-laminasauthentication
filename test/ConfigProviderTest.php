@@ -8,8 +8,14 @@ use Mezzio\Authentication\LaminasAuthentication\ConfigProvider;
 use PHPUnit\Framework\Constraint\IsType;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @psalm-suppress MissingConstructor
+ */
 class ConfigProviderTest extends TestCase
 {
+    /**
+     * @psalm-suppress UndefinedThisPropertyAssignment
+     */
     public function setUp(): void
     {
         $this->provider = new ConfigProvider();
@@ -24,6 +30,7 @@ class ConfigProviderTest extends TestCase
 
     /**
      * @depends testInvocationReturnsArray
+     * @psalm-suppress MissingReturnType
      */
     public function testReturnedArrayContainsDependencies(array $config)
     {
@@ -33,6 +40,7 @@ class ConfigProviderTest extends TestCase
 
     /**
      * @depends testInvocationReturnsArray
+     * @psalm-suppress MissingReturnType
      */
     public function testReturnedArrayContainsAuthenticationConfig(array $config)
     {
