@@ -70,7 +70,7 @@ class LaminasAuthentication implements AuthenticationInterface
             }
             return null;
         }
-
+        /** @var UserInterface */
         return ($this->userFactory)($this->auth->getIdentity());
     }
 
@@ -102,6 +102,7 @@ class LaminasAuthentication implements AuthenticationInterface
             return null;
         }
 
+        /** @var UserInterface*/
         return ($this->userFactory)($result->getIdentity());
     }
 }
