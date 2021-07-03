@@ -51,6 +51,7 @@ class LaminasAuthentication implements AuthenticationInterface
 
         // Ensures type safety of the composed factory
         $this->responseFactory = function () use ($responseFactory) : ResponseInterface {
+            /** @var ResponseInterface */
             return $responseFactory();
         };
 
@@ -60,6 +61,7 @@ class LaminasAuthentication implements AuthenticationInterface
             array $roles = [],
             array $details = []
         ) use ($userFactory) : UserInterface {
+            /** @var UserInterface */
             return $userFactory($identity, $roles, $details);
         };
     }
@@ -72,12 +74,13 @@ class LaminasAuthentication implements AuthenticationInterface
             }
             return null;
         }
-
+        /** @var UserInterface */
         return ($this->userFactory)($this->auth->getIdentity());
     }
 
     public function unauthorizedResponse(ServerRequestInterface $request) : ResponseInterface
     {
+        /** @var ResponseInterface */
         return ($this->responseFactory)()
             ->withHeader(
                 'Location',
@@ -104,6 +107,7 @@ class LaminasAuthentication implements AuthenticationInterface
             return null;
         }
 
+        /** @var UserInterface*/
         return ($this->userFactory)($result->getIdentity());
     }
 }

@@ -13,23 +13,10 @@
       <code>$password</code>
       <code>$username</code>
     </MixedAssignment>
-    <MixedInferredReturnType occurrences="5">
-      <code>?UserInterface</code>
-      <code>?UserInterface</code>
-      <code>ResponseInterface</code>
-      <code>ResponseInterface</code>
-      <code>UserInterface</code>
-    </MixedInferredReturnType>
     <MixedMethodCall occurrences="2">
       <code>withHeader</code>
       <code>withStatus</code>
     </MixedMethodCall>
-    <MixedReturnStatement occurrences="5">
-      <code>$responseFactory()</code>
-      <code>$userFactory($identity, $roles, $details)</code>
-      <code>($this-&gt;userFactory)($result-&gt;getIdentity())</code>
-      <code>($this-&gt;userFactory)($this-&gt;auth-&gt;getIdentity())</code>
-    </MixedReturnStatement>
     <PossiblyNullReference occurrences="2">
       <code>setCredential</code>
       <code>setIdentity</code>
