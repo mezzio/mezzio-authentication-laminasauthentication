@@ -27,60 +27,9 @@
     </PossiblyInvalidArgument>
   </file>
   <file src="test/LaminasAuthenticationFactoryTest.php">
-    <InvalidFunctionCall occurrences="3">
-      <code>($this-&gt;factory)($this-&gt;container-&gt;reveal())</code>
-      <code>($this-&gt;factory)($this-&gt;container-&gt;reveal())</code>
-      <code>($this-&gt;factory)($this-&gt;container-&gt;reveal())</code>
-    </InvalidFunctionCall>
     <InvalidPropertyAssignmentValue occurrences="1">
       <code>new LaminasAuthenticationFactory()</code>
     </InvalidPropertyAssignmentValue>
-    <MissingClosureReturnType occurrences="2">
-      <code>function () {</code>
-      <code>function () {</code>
-    </MissingClosureReturnType>
-    <MissingReturnType occurrences="3">
-      <code>testInvokeWithContainerAndConfig</code>
-      <code>testInvokeWithContainerEmptyConfig</code>
-      <code>testInvokeWithEmptyContainer</code>
-    </MissingReturnType>
-    <MixedArgument occurrences="1">
-      <code>$this-&gt;responsePrototype-&gt;reveal()</code>
-    </MixedArgument>
-    <MixedAssignment occurrences="1">
-      <code>$responseFactory</code>
-    </MixedAssignment>
-    <MixedFunctionCall occurrences="1">
-      <code>$responseFactory()</code>
-    </MixedFunctionCall>
-    <MixedMethodCall occurrences="8">
-      <code>willReturn</code>
-      <code>willReturn</code>
-      <code>willReturn</code>
-      <code>willReturn</code>
-      <code>willReturn</code>
-      <code>willReturn</code>
-      <code>willReturn</code>
-      <code>willReturn</code>
-    </MixedMethodCall>
-    <PossiblyInvalidMethodCall occurrences="6">
-      <code>willReturn</code>
-      <code>willReturn</code>
-      <code>willReturn</code>
-      <code>willReturn</code>
-      <code>willReturn</code>
-      <code>willReturn</code>
-    </PossiblyInvalidMethodCall>
-    <PossiblyUndefinedMethod occurrences="8">
-      <code>reveal</code>
-      <code>reveal</code>
-      <code>reveal</code>
-      <code>reveal</code>
-      <code>reveal</code>
-      <code>reveal</code>
-      <code>reveal</code>
-      <code>reveal</code>
-    </PossiblyUndefinedMethod>
   </file>
   <file src="test/LaminasAuthenticationTest.php">
     <MissingClosureReturnType occurrences="2">

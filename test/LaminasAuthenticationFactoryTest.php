@@ -23,6 +23,9 @@ use Psr\Http\Message\ResponseInterface;
 use ReflectionProperty;
 use Prophecy\PhpUnit\ProphecyTrait;
 
+/**
+ * @psalm-suppress MissingConstructor
+ */
 class LaminasAuthenticationFactoryTest extends TestCase
 {
     use ProphecyTrait;
@@ -48,6 +51,10 @@ class LaminasAuthenticationFactoryTest extends TestCase
     /** @var callable */
     private $userFactory;
 
+    /**
+     * @psalm-suppress PossiblyUndefinedMethod
+     * @psalm-suppress MissingClosureReturnType
+     */
     public function setUp(): void
     {
         $this->container = $this->prophesize(ContainerInterface::class);
@@ -63,12 +70,24 @@ class LaminasAuthenticationFactoryTest extends TestCase
         };
     }
 
+    /**
+     * @psalm-suppress MissingReturnType
+     * @psalm-suppress InvalidFunctionCall
+     * @psalm-suppress PossiblyUndefinedMethod
+     */
     public function testInvokeWithEmptyContainer()
     {
         $this->expectException(InvalidConfigException::class);
         ($this->factory)($this->container->reveal());
     }
 
+    /**
+     * @psalm-suppress MissingReturnType
+     * @psalm-suppress PossiblyInvalidMethodCall
+     * @psalm-suppress MixedMethodCall
+     * @psalm-suppress InvalidFunctionCall
+     * @psalm-suppress PossiblyUndefinedMethod
+     */
     public function testInvokeWithContainerEmptyConfig()
     {
         $this->container
@@ -97,6 +116,14 @@ class LaminasAuthenticationFactoryTest extends TestCase
         ($this->factory)($this->container->reveal());
     }
 
+    /**
+     * @psalm-suppress MissingReturnType
+     * @psalm-suppress PossiblyInvalidMethodCall
+     * @psalm-suppress MixedMethodCall
+     * @psalm-suppress InvalidFunctionCall
+     * @psalm-suppress PossiblyUndefinedMethod
+     * @psalm-suppress MixedArgument
+     */
     public function testInvokeWithContainerAndConfig()
     {
         $this->container
@@ -128,6 +155,10 @@ class LaminasAuthenticationFactoryTest extends TestCase
         $this->assertResponseFactoryReturns($this->responsePrototype->reveal(), $laminasAuthentication);
     }
 
+    /**
+     * @psalm-suppress MixedAssignment
+     * @psalm-suppress MixedFunctionCall
+     */
     public static function assertResponseFactoryReturns(
         ResponseInterface $expected,
         LaminasAuthentication $service
