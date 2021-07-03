@@ -27,23 +27,12 @@
     </PossiblyInvalidArgument>
   </file>
   <file src="test/ConfigProviderTest.php">
-    <MissingParamType occurrences="1">
-      <code>$actual</code>
-    </MissingParamType>
-    <MissingReturnType occurrences="3">
-      <code>testInvocationReturnsArray</code>
-      <code>testReturnedArrayContainsAuthenticationConfig</code>
-      <code>testReturnedArrayContainsDependencies</code>
-    </MissingReturnType>
     <MixedAssignment occurrences="1">
       <code>$config</code>
     </MixedAssignment>
     <MixedFunctionCall occurrences="1">
       <code>($this-&gt;provider)()</code>
     </MixedFunctionCall>
-    <UndefinedThisPropertyAssignment occurrences="1">
-      <code>$this-&gt;provider</code>
-    </UndefinedThisPropertyAssignment>
     <UndefinedThisPropertyFetch occurrences="1">
       <code>$this-&gt;provider</code>
     </UndefinedThisPropertyFetch>
