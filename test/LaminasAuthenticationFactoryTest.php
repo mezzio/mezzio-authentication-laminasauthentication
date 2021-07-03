@@ -47,7 +47,7 @@ class LaminasAuthenticationFactoryTest extends TestCase
         };
     }
 
-    public function testInvokeWithEmptyContainer()
+    public function testInvokeWithEmptyContainer(): void
     {
         $container = $this->createMock(ContainerInterface::class);
         $factory   = new LaminasAuthenticationFactory();
@@ -55,7 +55,7 @@ class LaminasAuthenticationFactoryTest extends TestCase
         $factory($container);
     }
 
-    public function testInvokeWithContainerEmptyConfig()
+    public function testInvokeWithContainerEmptyConfig(): void
     {
         $container = $this->createMock(ContainerInterface::class);
         $container
@@ -80,7 +80,7 @@ class LaminasAuthenticationFactoryTest extends TestCase
         $factory($container);
     }
 
-    public function testInvokeWithContainerAndConfig()
+    public function testInvokeWithContainerAndConfig(): void
     {
         $container = $this->createMock(ContainerInterface::class);
         $container
