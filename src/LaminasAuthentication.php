@@ -92,7 +92,9 @@ class LaminasAuthentication implements AuthenticationInterface
     private function initiateAuthentication(ServerRequestInterface $request) : ?UserInterface
     {
         $params = $request->getParsedBody();
+        /** @var string */
         $username = $this->config['username'] ?? 'username';
+        /** @var string */
         $password = $this->config['password'] ?? 'password';
 
         if (! isset($params[$username]) || ! isset($params[$password])) {
