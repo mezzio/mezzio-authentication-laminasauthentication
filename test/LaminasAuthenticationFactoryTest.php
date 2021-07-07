@@ -54,6 +54,7 @@ class LaminasAuthenticationFactoryTest extends TestCase
     /**
      * @psalm-suppress PossiblyUndefinedMethod
      * @psalm-suppress MissingClosureReturnType
+     * @psalm-suppress InvalidPropertyAssignmentValue
      */
     public function setUp(): void
     {

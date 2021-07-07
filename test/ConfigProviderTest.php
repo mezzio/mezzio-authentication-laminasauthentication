@@ -22,9 +22,6 @@ class ConfigProviderTest extends TestCase
     /** @var ConfigProvider*/
     private $provider;
 
-    /**
-     * @psalm-suppress UndefinedThisPropertyAssignment
-     */
     public function setUp(): void
     {
         $this->provider = new ConfigProvider();
