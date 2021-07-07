@@ -14,14 +14,20 @@ use Mezzio\Authentication\LaminasAuthentication\ConfigProvider;
 use PHPUnit\Framework\Constraint\IsType;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @psalm-suppress MissingConstructor
+ */
 class ConfigProviderTest extends TestCase
 {
+    /** @var ConfigProvider*/
+    private $provider;
+
     public function setUp(): void
     {
         $this->provider = new ConfigProvider();
     }
 
-    public function testInvocationReturnsArray()
+    public function testInvocationReturnsArray(): array
     {
         $config = ($this->provider)();
         $this->assertInternalType('array', $config);
@@ -31,7 +37,7 @@ class ConfigProviderTest extends TestCase
     /**
      * @depends testInvocationReturnsArray
      */
-    public function testReturnedArrayContainsDependencies(array $config)
+    public function testReturnedArrayContainsDependencies(array $config): void
     {
         $this->assertArrayHasKey('dependencies', $config);
         $this->assertInternalType('array', $config['dependencies']);
@@ -40,12 +46,15 @@ class ConfigProviderTest extends TestCase
     /**
      * @depends testInvocationReturnsArray
      */
-    public function testReturnedArrayContainsAuthenticationConfig(array $config)
+    public function testReturnedArrayContainsAuthenticationConfig(array $config): void
     {
         $this->assertArrayHasKey('authentication', $config);
         $this->assertInternalType('array', $config['authentication']);
     }
 
+    /**
+     * @psalm-suppress MissingParamType
+     */
     private static function assertInternalType(string $expected, $actual, string $message = ''): void
     {
         static::assertThat(

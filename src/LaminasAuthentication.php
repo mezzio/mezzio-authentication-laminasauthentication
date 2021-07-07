@@ -51,6 +51,7 @@ class LaminasAuthentication implements AuthenticationInterface
 
         // Ensures type safety of the composed factory
         $this->responseFactory = function () use ($responseFactory) : ResponseInterface {
+            /** @var ResponseInterface */
             return $responseFactory();
         };
 
@@ -60,6 +61,7 @@ class LaminasAuthentication implements AuthenticationInterface
             array $roles = [],
             array $details = []
         ) use ($userFactory) : UserInterface {
+            /** @var UserInterface */
             return $userFactory($identity, $roles, $details);
         };
     }
@@ -72,12 +74,16 @@ class LaminasAuthentication implements AuthenticationInterface
             }
             return null;
         }
-
+        /** @var UserInterface */
         return ($this->userFactory)($this->auth->getIdentity());
     }
 
+    /**
+     * @psalm-suppress MixedMethodCall
+     */
     public function unauthorizedResponse(ServerRequestInterface $request) : ResponseInterface
     {
+        /** @var ResponseInterface */
         return ($this->responseFactory)()
             ->withHeader(
                 'Location',
@@ -86,10 +92,16 @@ class LaminasAuthentication implements AuthenticationInterface
             ->withStatus(301);
     }
 
+    /**
+     * @psalm-suppress PossiblyNullReference
+     * @psalm-suppress UndefinedInterfaceMethod
+     */
     private function initiateAuthentication(ServerRequestInterface $request) : ?UserInterface
     {
         $params = $request->getParsedBody();
+        /** @var string */
         $username = $this->config['username'] ?? 'username';
+        /** @var string */
         $password = $this->config['password'] ?? 'password';
 
         if (! isset($params[$username]) || ! isset($params[$password])) {
@@ -104,6 +116,7 @@ class LaminasAuthentication implements AuthenticationInterface
             return null;
         }
 
+        /** @var UserInterface*/
         return ($this->userFactory)($result->getIdentity());
     }
 }
