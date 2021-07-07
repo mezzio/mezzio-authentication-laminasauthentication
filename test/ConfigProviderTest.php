@@ -8,17 +8,11 @@ use Mezzio\Authentication\LaminasAuthentication\ConfigProvider;
 use PHPUnit\Framework\Constraint\IsType;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @psalm-suppress MissingConstructor
- */
 class ConfigProviderTest extends TestCase
 {
     /** @var ConfigProvider */
     private $provider;
 
-    /**
-     * @psalm-suppress UndefinedThisPropertyAssignment
-     */
     public function setUp(): void
     {
         $this->provider = new ConfigProvider();
