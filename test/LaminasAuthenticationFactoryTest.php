@@ -10,33 +10,25 @@ use Mezzio\Authentication\LaminasAuthentication\LaminasAuthentication;
 use Mezzio\Authentication\LaminasAuthentication\LaminasAuthenticationFactory;
 use Mezzio\Authentication\UserInterface;
 use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Prophecy\PhpUnit\ProphecyTrait;
-use Prophecy\Prophecy\ObjectProphecy;
 use Psr\Container\ContainerInterface;
+use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use ReflectionProperty;
 
 class LaminasAuthenticationFactoryTest extends TestCase
 {
-    use ProphecyTrait;
-
-    /** @var ContainerInterface|ObjectProphecy */
-    private $container;
-
-    /** @var LaminasAuthentication */
-    private $factory;
-
-    /** @var AuthenticationService|ObjectProphecy */
+    /** @var AuthenticationService&MockObject */
     private $authService;
 
-    /** @var ResponseInterface|ObjectProphecy */
+    /** @var ResponseInterface&MockObject */
     private $responsePrototype;
 
     /** @var callable */
     private $responseFactory;
 
-    /** @var UserInterface|ObjectProphecy */
+    /** @var UserInterface&MockObject */
     private $userPrototype;
 
     /** @var callable */
@@ -44,91 +36,93 @@ class LaminasAuthenticationFactoryTest extends TestCase
 
     public function setUp(): void
     {
-        $this->container         = $this->prophesize(ContainerInterface::class);
-        $this->factory           = new LaminasAuthenticationFactory();
-        $this->authService       = $this->prophesize(AuthenticationService::class);
-        $this->responsePrototype = $this->prophesize(ResponseInterface::class);
+        $this->authService       = $this->createMock(AuthenticationService::class);
+        $this->responsePrototype = $this->createMock(ResponseInterface::class);
         $this->responseFactory   = function () {
-            return $this->responsePrototype->reveal();
+            return $this->responsePrototype;
         };
-        $this->userPrototype     = $this->prophesize(UserInterface::class);
+        $this->userPrototype     = $this->createMock(UserInterface::class);
         $this->userFactory       = function () {
-            return $this->userPrototype->reveal();
+            return $this->userPrototype;
         };
     }
 
     public function testInvokeWithEmptyContainer()
     {
+        $container = $this->createMock(ContainerInterface::class);
+        $factory   = new LaminasAuthenticationFactory();
         $this->expectException(InvalidConfigException::class);
-        ($this->factory)($this->container->reveal());
+        $factory($container);
     }
 
     public function testInvokeWithContainerEmptyConfig()
     {
-        $this->container
-            ->has(AuthenticationService::class)
-            ->willReturn(true);
-        $this->container
-            ->get(AuthenticationService::class)
-            ->willReturn($this->authService->reveal());
-        $this->container
-            ->has(ResponseInterface::class)
-            ->willReturn(true);
-        $this->container
-            ->get(ResponseInterface::class)
-            ->willReturn($this->responseFactory);
-        $this->container
-            ->has(UserInterface::class)
-            ->willReturn(true);
-        $this->container
-            ->get(UserInterface::class)
-            ->willReturn($this->userFactory);
-        $this->container
-            ->get('config')
-            ->willReturn([]);
+        $container = $this->createMock(ContainerInterface::class);
+        $container
+            ->method('has')
+            ->will($this->returnValueMap([
+                [AuthenticationService::class, true],
+                [ResponseInterface::class, true],
+                [UserInterface::class, true],
+            ]));
+        $container
+            ->method('get')
+            ->will($this->returnValueMap([
+                [AuthenticationService::class, $this->authService],
+                [ResponseInterface::class, $this->responseFactory],
+                [UserInterface::class, $this->userFactory],
+                ['config', []],
+            ]));
+
+        $factory = new LaminasAuthenticationFactory();
 
         $this->expectException(InvalidConfigException::class);
-        ($this->factory)($this->container->reveal());
+        $factory($container);
     }
 
     public function testInvokeWithContainerAndConfig()
     {
-        $this->container
-            ->has(AuthenticationService::class)
-            ->willReturn(true);
-        $this->container
-            ->get(AuthenticationService::class)
-            ->willReturn($this->authService->reveal());
-        $this->container
-            ->has(ResponseInterface::class)
-            ->willReturn(true);
-        $this->container
-            ->get(ResponseInterface::class)
-            ->willReturn($this->responseFactory);
-        $this->container
-            ->has(UserInterface::class)
-            ->willReturn(true);
-        $this->container
-            ->get(UserInterface::class)
-            ->willReturn($this->userFactory);
-        $this->container
-            ->get('config')
-            ->willReturn([
-                'authentication' => ['redirect' => '/login'],
-            ]);
+        $container = $this->createMock(ContainerInterface::class);
+        $container
+            ->method('has')
+            ->will($this->returnValueMap([
+                [AuthenticationService::class, true],
+                [ResponseInterface::class, true],
+                [UserInterface::class, true],
+            ]));
+        $container
+            ->method('get')
+            ->will($this->returnValueMap([
+                [AuthenticationService::class, $this->authService],
+                [ResponseInterface::class, $this->responseFactory],
+                [UserInterface::class, $this->userFactory],
+                [
+                    'config',
+                    [
+                        'authentication' => ['redirect' => '/login'],
+                    ],
+                ],
+            ]));
 
-        $laminasAuthentication = ($this->factory)($this->container->reveal());
+        $factory               = new LaminasAuthenticationFactory();
+        $laminasAuthentication = $factory($container);
         $this->assertInstanceOf(LaminasAuthentication::class, $laminasAuthentication);
-        $this->assertResponseFactoryReturns($this->responsePrototype->reveal(), $laminasAuthentication);
+        $this->assertResponseFactoryReturns($this->responsePrototype, $laminasAuthentication);
     }
 
-    public static function assertResponseFactoryReturns(
+    public function assertResponseFactoryReturns(
         ResponseInterface $expected,
         LaminasAuthentication $service
     ): void {
         $r = new ReflectionProperty($service, 'responseFactory');
         $r->setAccessible(true);
+        /** @var ResponseFactoryInterface $responseFactory */
         $responseFactory = $r->getValue($service);
-        Assert::assertSame($expected, $responseFactory());
+        $this->responsePrototype
+            ->expects($this->once())
+            ->method('withStatus')
+            ->with(200, '')
+            ->willReturnSelf();
+        Assert::assertSame($expected, $responseFactory->createResponse());
     }
 }
