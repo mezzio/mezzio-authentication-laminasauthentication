@@ -87,6 +87,7 @@ class LaminasAuthenticationFactoryTest extends TestCase
             ->method('has')
             ->will($this->returnValueMap([
                 [AuthenticationService::class, true],
+                [ResponseFactoryInterface::class, false],
                 [ResponseInterface::class, true],
                 [UserInterface::class, true],
             ]));
@@ -94,6 +95,7 @@ class LaminasAuthenticationFactoryTest extends TestCase
             ->method('get')
             ->will($this->returnValueMap([
                 [AuthenticationService::class, $this->authService],
+                [ResponseInterface::class, $this->responseFactory],
                 [ResponseInterface::class, $this->responseFactory],
                 [UserInterface::class, $this->userFactory],
                 [
