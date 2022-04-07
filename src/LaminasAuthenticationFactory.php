@@ -8,12 +8,13 @@ use Laminas\Authentication\AuthenticationService;
 use Mezzio\Authentication\Exception;
 use Mezzio\Authentication\UserInterface;
 use Psr\Container\ContainerInterface;
-use Psr\Http\Message\ResponseInterface;
 
 use function sprintf;
 
 class LaminasAuthenticationFactory
 {
+    use Psr17ResponseFactoryTrait;
+
     public function __invoke(ContainerInterface $container): LaminasAuthentication
     {
         $auth = $container->has(AuthenticationService::class)
@@ -49,7 +50,7 @@ class LaminasAuthenticationFactory
         return new LaminasAuthentication(
             $auth,
             $config,
-            $container->get(ResponseInterface::class),
+            $this->detectResponseFactory($container),
             $container->has(UserInterface::class)
                 ? $container->get(UserInterface::class)
                 : $container->get(\Zend\Expressive\Authentication\UserInterface::class)

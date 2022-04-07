@@ -6,10 +6,12 @@ namespace Mezzio\Authentication\LaminasAuthentication;
 
 use Laminas\Authentication\AuthenticationService;
 use Mezzio\Authentication\AuthenticationInterface;
+use Mezzio\Authentication\LaminasAuthentication\Response\CallableResponseFactoryDecorator;
 use Mezzio\Authentication\UserInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
+use function is_callable;
 use function strtoupper;
 
 class LaminasAuthentication implements AuthenticationInterface
@@ -20,25 +22,35 @@ class LaminasAuthentication implements AuthenticationInterface
     /** @var array */
     protected $config;
 
-    /** @var callable */
+    // phpcs:disable SlevomatCodingStandard.Commenting.InlineDocCommentDeclaration.InvalidFormat
+    /** @var (callable():ResponseInterface)|ResponseFactoryInterface */
     protected $responseFactory;
 
     /** @var callable */
     protected $userFactory;
 
+    // phpcs:disable SlevomatCodingStandard.Commenting.InlineDocCommentDeclaration.InvalidFormat
+    /** @param (callable():ResponseInterface)|ResponseFactoryInterface $responseFactory */
     public function __construct(
         AuthenticationService $auth,
         array $config,
-        callable $responseFactory,
+        $responseFactory,
         callable $userFactory
     ) {
         $this->auth   = $auth;
         $this->config = $config;
 
         // Ensures type safety of the composed factory
-        $this->responseFactory = function () use ($responseFactory): ResponseInterface {
-            return $responseFactory();
-        };
+        if (is_callable($responseFactory)) {
+            // Ensures type safety of the composed factory
+            $responseFactory = new CallableResponseFactoryDecorator(
+                static function () use ($responseFactory): ResponseInterface {
+                    return $responseFactory();
+                }
+            );
+        }
+
+        $this->responseFactory = $responseFactory;
 
         // Ensures type safety of the composed factory
         $this->userFactory = function (
@@ -64,12 +76,12 @@ class LaminasAuthentication implements AuthenticationInterface
 
     public function unauthorizedResponse(ServerRequestInterface $request): ResponseInterface
     {
-        return ($this->responseFactory)()
+        return $this->responseFactory
+            ->createResponse(301)
             ->withHeader(
                 'Location',
                 $this->config['redirect']
-            )
-            ->withStatus(301);
+            );
     }
 
     private function initiateAuthentication(ServerRequestInterface $request): ?UserInterface
