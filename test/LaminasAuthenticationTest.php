@@ -36,11 +36,11 @@ class LaminasAuthenticationTest extends TestCase
     {
         $this->request         = $this->createMock(ServerRequestInterface::class);
         $this->authService     = $this->createMock(AuthenticationService::class);
-        $this->responseFactory = function () {
+        $this->responseFactory = function (): ResponseInterface {
             return $this->createMock(ResponseInterface::class);
         };
         $this->userPrototype   = $this->createMock(UserInterface::class);
-        $this->userFactory     = function () {
+        $this->userFactory     = function (): UserInterface {
             return $this->userPrototype;
         };
     }

@@ -1,13 +1,12 @@
 <?xml version="1.0"?>
 <psalm
-    totallyTyped="true"
+    errorLevel="1"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns="https://getpsalm.org/schema/config"
     xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
     errorBaseline="psalm-baseline.xml"
 >
     <projectFiles>
-        <directory name="bin"/>
         <directory name="src"/>
         <directory name="test"/>
         <ignoreFiles>
@@ -16,6 +15,16 @@
     </projectFiles>
 
     <issueHandlers>
+        <DeprecatedClass>
+            <errorLevel type="suppress">
+                <referencedClass name="Mezzio\Authentication\LaminasAuthentication\Response\CallableResponseFactoryDecorator"/>
+            </errorLevel>
+        </DeprecatedClass>
+        <DeprecatedTrait>
+            <errorLevel type="suppress">
+                <file name="src/LaminasAuthenticationFactory.php"/>
+            </errorLevel>
+        </DeprecatedTrait>
         <InternalMethod>
             <errorLevel type="suppress">
                 <referencedMethod name="PHPUnit\Framework\MockObject\Builder\InvocationMocker::method"/>
@@ -27,6 +36,19 @@
                 <referencedMethod name="PHPUnit\Framework\MockObject\Builder\InvocationMocker::with"/>
             </errorLevel>
         </InternalMethod>
+        <UndefinedClass>
+            <errorLevel type="suppress">
+                <referencedClass name="Mezzio\Container\ResponseFactoryFactory"/>
+            </errorLevel>
+        </UndefinedClass>
+        <UndefinedInterfaceMethod>
+            <errorLevel type="suppress">
+                <referencedMethod name="Laminas\Authentication\Adapter\AdapterInterface::setCredential"/>
+            </errorLevel>
+            <errorLevel type="suppress">
+                <referencedMethod name="Laminas\Authentication\Adapter\AdapterInterface::setIdentity"/>
+            </errorLevel>
+        </UndefinedInterfaceMethod>
     </issueHandlers>
     <plugins>
         <pluginClass class="Psalm\PhpUnitPlugin\Plugin"/>

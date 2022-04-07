@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="4.22.0@fc2c6ab4d5fa5d644d8617089f012f3bb84b8703">
+  <file src="src/LaminasAuthentication.php">
+    <MixedArgument occurrences="1">
+      <code>$this-&gt;config['redirect']</code>
+    </MixedArgument>
+    <MixedInferredReturnType occurrences="1">
+      <code>UserInterface</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement occurrences="1">
+      <code>$userFactory($identity, $roles, $details)</code>
+    </MixedReturnStatement>
+    <PossiblyNullReference occurrences="2">
+      <code>setCredential</code>
+      <code>setIdentity</code>
+    </PossiblyNullReference>
+  </file>
+  <file src="src/LaminasAuthenticationFactory.php">
+    <MixedArgument occurrences="2">
+      <code>$auth</code>
+      <code>$container-&gt;get(UserInterface::class)</code>
+    </MixedArgument>
+    <MixedAssignment occurrences="1">
+      <code>$auth</code>
+    </MixedAssignment>
+    <PossiblyInvalidArgument occurrences="1">
+      <code>$config</code>
+    </PossiblyInvalidArgument>
+  </file>
+  <file src="test/LaminasAuthenticationTest.php">
+    <MixedArgumentTypeCoercion occurrences="8">
+      <code>$this-&gt;responseFactory</code>
+      <code>$this-&gt;responseFactory</code>
+      <code>$this-&gt;responseFactory</code>
+      <code>$this-&gt;responseFactory</code>
+      <code>$this-&gt;responseFactory</code>
+      <code>$this-&gt;responseFactory</code>
+      <code>$this-&gt;responseFactory</code>
+      <code>$this-&gt;responseFactory</code>
+    </MixedArgumentTypeCoercion>
+  </file>
+</files>

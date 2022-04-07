@@ -8,6 +8,7 @@ use Laminas\Authentication\AuthenticationService;
 use Mezzio\Authentication\AuthenticationInterface;
 use Mezzio\Authentication\LaminasAuthentication\Response\CallableResponseFactoryDecorator;
 use Mezzio\Authentication\UserInterface;
+use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -22,8 +23,7 @@ class LaminasAuthentication implements AuthenticationInterface
     /** @var array */
     protected $config;
 
-    // phpcs:disable SlevomatCodingStandard.Commenting.InlineDocCommentDeclaration.InvalidFormat
-    /** @var (callable():ResponseInterface)|ResponseFactoryInterface */
+    /** @var ResponseFactoryInterface */
     protected $responseFactory;
 
     /** @var callable */
