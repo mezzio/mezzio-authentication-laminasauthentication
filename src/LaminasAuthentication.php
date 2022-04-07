@@ -8,6 +8,7 @@ use Laminas\Authentication\AuthenticationService;
 use Mezzio\Authentication\AuthenticationInterface;
 use Mezzio\Authentication\LaminasAuthentication\Response\CallableResponseFactoryDecorator;
 use Mezzio\Authentication\UserInterface;
+use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -22,8 +23,7 @@ class LaminasAuthentication implements AuthenticationInterface
     /** @var array */
     protected $config;
 
-    // phpcs:disable SlevomatCodingStandard.Commenting.InlineDocCommentDeclaration.InvalidFormat
-    /** @var (callable():ResponseInterface)|ResponseFactoryInterface */
+    /** @var ResponseFactoryInterface */
     protected $responseFactory;
 
     /** @var callable */
@@ -70,7 +70,7 @@ class LaminasAuthentication implements AuthenticationInterface
             }
             return null;
         }
-
+        /** @var UserInterface */
         return ($this->userFactory)($this->auth->getIdentity());
     }
 
@@ -86,8 +86,10 @@ class LaminasAuthentication implements AuthenticationInterface
 
     private function initiateAuthentication(ServerRequestInterface $request): ?UserInterface
     {
-        $params   = $request->getParsedBody();
+        $params = $request->getParsedBody();
+        /** @var string */
         $username = $this->config['username'] ?? 'username';
+        /** @var string */
         $password = $this->config['password'] ?? 'password';
 
         if (! isset($params[$username]) || ! isset($params[$password])) {
@@ -102,6 +104,7 @@ class LaminasAuthentication implements AuthenticationInterface
             return null;
         }
 
+        /** @var UserInterface*/
         return ($this->userFactory)($result->getIdentity());
     }
 }

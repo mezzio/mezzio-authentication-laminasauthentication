@@ -36,16 +36,16 @@ class LaminasAuthenticationTest extends TestCase
     {
         $this->request         = $this->createMock(ServerRequestInterface::class);
         $this->authService     = $this->createMock(AuthenticationService::class);
-        $this->responseFactory = function () {
+        $this->responseFactory = function (): ResponseInterface {
             return $this->createMock(ResponseInterface::class);
         };
         $this->userPrototype   = $this->createMock(UserInterface::class);
-        $this->userFactory     = function () {
+        $this->userFactory     = function (): UserInterface {
             return $this->userPrototype;
         };
     }
 
-    public function testConstructor()
+    public function testConstructor(): void
     {
         $laminasAuthentication = new LaminasAuthentication(
             $this->authService,
@@ -56,7 +56,7 @@ class LaminasAuthenticationTest extends TestCase
         $this->assertInstanceOf(AuthenticationInterface::class, $laminasAuthentication);
     }
 
-    public function testAuthenticateWithGetMethodAndIdentity()
+    public function testAuthenticateWithGetMethodAndIdentity(): void
     {
         $this->request->method('getMethod')->willReturn('GET');
         $this->authService->method('hasIdentity')->willReturn(true);
@@ -72,7 +72,7 @@ class LaminasAuthenticationTest extends TestCase
         $this->assertInstanceOf(UserInterface::class, $result);
     }
 
-    public function testAuthenticateWithGetMethodAndNoIdentity()
+    public function testAuthenticateWithGetMethodAndNoIdentity(): void
     {
         $this->request->method('getMethod')->willReturn('GET');
         $this->authService->method('hasIdentity')->willReturn(false);
@@ -86,7 +86,7 @@ class LaminasAuthenticationTest extends TestCase
         $this->assertNull($laminasAuthentication->authenticate($this->request));
     }
 
-    public function testAuthenticateWithPostMethodAndNoParams()
+    public function testAuthenticateWithPostMethodAndNoParams(): void
     {
         $this->request->method('getMethod')->willReturn('POST');
         $this->request->method('getParsedBody')->willReturn([]);
@@ -100,7 +100,7 @@ class LaminasAuthenticationTest extends TestCase
         $this->assertNull($laminasAuthentication->authenticate($this->request));
     }
 
-    public function testAuthenticateWithPostMethodAndNoValidCredential()
+    public function testAuthenticateWithPostMethodAndNoValidCredential(): void
     {
         //not authenticated
         $this->authService->method('hasIdentity')->willReturn(false);
@@ -133,7 +133,7 @@ class LaminasAuthenticationTest extends TestCase
         $this->assertNull($laminasAuthentication->authenticate($this->request));
     }
 
-    public function testAuthenticateWithPostMethodAndValidCredential()
+    public function testAuthenticateWithPostMethodAndValidCredential(): void
     {
         //not authenticated
         $this->authService->method('hasIdentity')->willReturn(false);
@@ -168,7 +168,7 @@ class LaminasAuthenticationTest extends TestCase
         $this->assertInstanceOf(UserInterface::class, $result);
     }
 
-    public function testAuthenticateWithPostMethodAndNoValidCredentialAndAlreadyAuthenticated()
+    public function testAuthenticateWithPostMethodAndNoValidCredentialAndAlreadyAuthenticated(): void
     {
         $this->authService->method('hasIdentity')->willReturn(true);
         $this->authService->method('getIdentity')->willReturn('string');
@@ -205,7 +205,7 @@ class LaminasAuthenticationTest extends TestCase
         $this->assertEquals('string', $identity->getIdentity());
     }
 
-    public function testAuthenticateWithPostMethodAndValidCredentialAndAlreadyAuthenticated()
+    public function testAuthenticateWithPostMethodAndValidCredentialAndAlreadyAuthenticated(): void
     {
         $this->authService->method('hasIdentity')->willReturn(true);
         $this->authService->method('getIdentity')->willReturn('string');

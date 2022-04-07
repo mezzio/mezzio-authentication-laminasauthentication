@@ -19,9 +19,7 @@ class LaminasAuthenticationFactory
     {
         $auth = $container->has(AuthenticationService::class)
             ? $container->get(AuthenticationService::class)
-            : ($container->has(\Zend\Authentication\AuthenticationService::class)
-                ? $container->get(\Zend\Authentication\AuthenticationService::class)
-                : null);
+            : null;
 
         if (null === $auth) {
             throw new Exception\InvalidConfigException(sprintf(
@@ -38,10 +36,7 @@ class LaminasAuthenticationFactory
             );
         }
 
-        if (
-            ! $container->has(UserInterface::class)
-            && ! $container->has(\Zend\Expressive\Authentication\UserInterface::class)
-        ) {
+        if (! $container->has(UserInterface::class)) {
             throw new Exception\InvalidConfigException(
                 'UserInterface factory service is missing for authentication'
             );
@@ -51,9 +46,7 @@ class LaminasAuthenticationFactory
             $auth,
             $config,
             $this->detectResponseFactory($container),
-            $container->has(UserInterface::class)
-                ? $container->get(UserInterface::class)
-                : $container->get(\Zend\Expressive\Authentication\UserInterface::class)
+            $container->get(UserInterface::class)
         );
     }
 }

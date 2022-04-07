@@ -10,6 +10,9 @@ use PHPUnit\Framework\TestCase;
 
 class ConfigProviderTest extends TestCase
 {
+    /** @var ConfigProvider */
+    private $provider;
+
     public function setUp(): void
     {
         $this->provider = new ConfigProvider();
@@ -25,7 +28,7 @@ class ConfigProviderTest extends TestCase
     /**
      * @depends testInvocationReturnsArray
      */
-    public function testReturnedArrayContainsDependencies(array $config)
+    public function testReturnedArrayContainsDependencies(array $config): void
     {
         $this->assertArrayHasKey('dependencies', $config);
         $this->assertInternalType('array', $config['dependencies']);
@@ -34,7 +37,7 @@ class ConfigProviderTest extends TestCase
     /**
      * @depends testInvocationReturnsArray
      */
-    public function testReturnedArrayContainsAuthenticationConfig(array $config)
+    public function testReturnedArrayContainsAuthenticationConfig(array $config): void
     {
         $this->assertArrayHasKey('authentication', $config);
         $this->assertInternalType('array', $config['authentication']);

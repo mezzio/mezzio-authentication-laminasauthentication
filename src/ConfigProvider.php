@@ -24,12 +24,6 @@ class ConfigProvider
     public function getDependencies(): array
     {
         return [
-            // Legacy Zend Framework aliases
-            'aliases'   => [
-                // @codingStandardsIgnoreStart
-                \Zend\Expressive\Authentication\ZendAuthentication\ZendAuthentication::class => LaminasAuthentication::class,
-                // @codingStandardsIgnoreEnd
-            ],
             'factories' => [
                 LaminasAuthentication::class => LaminasAuthenticationFactory::class,
             ],

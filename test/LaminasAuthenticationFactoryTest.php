@@ -38,16 +38,16 @@ class LaminasAuthenticationFactoryTest extends TestCase
     {
         $this->authService       = $this->createMock(AuthenticationService::class);
         $this->responsePrototype = $this->createMock(ResponseInterface::class);
-        $this->responseFactory   = function () {
+        $this->responseFactory   = function (): ResponseInterface {
             return $this->responsePrototype;
         };
         $this->userPrototype     = $this->createMock(UserInterface::class);
-        $this->userFactory       = function () {
+        $this->userFactory       = function (): UserInterface {
             return $this->userPrototype;
         };
     }
 
-    public function testInvokeWithEmptyContainer()
+    public function testInvokeWithEmptyContainer(): void
     {
         $container = $this->createMock(ContainerInterface::class);
         $factory   = new LaminasAuthenticationFactory();
@@ -55,7 +55,7 @@ class LaminasAuthenticationFactoryTest extends TestCase
         $factory($container);
     }
 
-    public function testInvokeWithContainerEmptyConfig()
+    public function testInvokeWithContainerEmptyConfig(): void
     {
         $container = $this->createMock(ContainerInterface::class);
         $container
@@ -80,7 +80,7 @@ class LaminasAuthenticationFactoryTest extends TestCase
         $factory($container);
     }
 
-    public function testInvokeWithContainerAndConfig()
+    public function testInvokeWithContainerAndConfig(): void
     {
         $container = $this->createMock(ContainerInterface::class);
         $container
