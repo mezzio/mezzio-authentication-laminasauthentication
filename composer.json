@@ -37,7 +37,7 @@
     },
     "require-dev": {
         "laminas/laminas-coding-standard": "~2.3.0",
-        "phpunit/phpunit": "^9.5"
+        "phpunit/phpunit": "^9.5.11"
     },
     "autoload": {
         "psr-4": {
