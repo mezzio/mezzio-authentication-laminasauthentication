@@ -113,7 +113,6 @@ class LaminasAuthenticationFactoryTest extends TestCase
         LaminasAuthentication $service
     ): void {
         $r = new ReflectionProperty($service, 'responseFactory');
-        $r->setAccessible(true);
         /** @var ResponseFactoryInterface $responseFactory */
         $responseFactory = $r->getValue($service);
         $this->responsePrototype
