@@ -56,19 +56,19 @@ class LaminasAuthenticationFactoryTest extends TestCase
         $container = $this->createMock(ContainerInterface::class);
         $container
             ->method('has')
-            ->will($this->returnValueMap([
+            ->willReturnMap([
                 [AuthenticationService::class, true],
                 [ResponseInterface::class, true],
                 [UserInterface::class, true],
-            ]));
+            ]);
         $container
             ->method('get')
-            ->will($this->returnValueMap([
+            ->willReturnMap([
                 [AuthenticationService::class, $this->authService],
                 [ResponseInterface::class, $this->responseFactory],
                 [UserInterface::class, $this->userFactory],
                 ['config', []],
-            ]));
+            ]);
 
         $factory = new LaminasAuthenticationFactory();
 
@@ -81,15 +81,15 @@ class LaminasAuthenticationFactoryTest extends TestCase
         $container = $this->createMock(ContainerInterface::class);
         $container
             ->method('has')
-            ->will($this->returnValueMap([
+            ->willReturnMap([
                 [AuthenticationService::class, true],
                 [ResponseFactoryInterface::class, false],
                 [ResponseInterface::class, true],
                 [UserInterface::class, true],
-            ]));
+            ]);
         $container
             ->method('get')
-            ->will($this->returnValueMap([
+            ->willReturnMap([
                 [AuthenticationService::class, $this->authService],
                 [ResponseInterface::class, $this->responseFactory],
                 [ResponseInterface::class, $this->responseFactory],
@@ -100,7 +100,7 @@ class LaminasAuthenticationFactoryTest extends TestCase
                         'authentication' => ['redirect' => '/login'],
                     ],
                 ],
-            ]));
+            ]);
 
         $factory               = new LaminasAuthenticationFactory();
         $laminasAuthentication = $factory($container);
