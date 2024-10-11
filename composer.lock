@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3c46ac219973c2f3789d7600df848f54",
+    "content-hash": "44b6c70695ea57e2eb9f916e4690693d",
     "packages": [
         {
             "name": "laminas/laminas-authentication",
