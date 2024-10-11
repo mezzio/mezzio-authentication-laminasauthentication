@@ -2,7 +2,19 @@
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
          bootstrap="vendor/autoload.php"
-         colors="true">
+         colors="true"
+         displayDetailsOnPhpunitDeprecations="true"
+         displayDetailsOnIncompleteTests="true"
+         displayDetailsOnSkippedTests="true"
+         displayDetailsOnTestsThatTriggerDeprecations="true"
+         displayDetailsOnTestsThatTriggerErrors="true"
+         displayDetailsOnTestsThatTriggerNotices="true"
+         displayDetailsOnTestsThatTriggerWarnings="true"
+         failOnDeprecation="true"
+         failOnNotice="true"
+         failOnWarning="true"
+         failOnPhpunitDeprecation="true"
+>
     <testsuites>
         <testsuite name="mezzio-authentication-laminasauthentication">
             <directory>./test</directory>
