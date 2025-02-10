@@ -28,17 +28,6 @@
                 <file name="src/LaminasAuthenticationFactory.php"/>
             </errorLevel>
         </DeprecatedTrait>
-        <InternalMethod>
-            <errorLevel type="suppress">
-                <referencedMethod name="PHPUnit\Framework\MockObject\Builder\InvocationMocker::method"/>
-            </errorLevel>
-            <errorLevel type="suppress">
-                <referencedMethod name="PHPUnit\Framework\MockObject\Builder\InvocationMocker::willReturn"/>
-            </errorLevel>
-            <errorLevel type="suppress">
-                <referencedMethod name="PHPUnit\Framework\MockObject\Builder\InvocationMocker::with"/>
-            </errorLevel>
-        </InternalMethod>
         <UndefinedClass>
             <errorLevel type="suppress">
                 <referencedClass name="Mezzio\Container\ResponseFactoryFactory"/>
