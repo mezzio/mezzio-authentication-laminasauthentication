@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-class LaminasAuthenticationTest extends TestCase
+final class LaminasAuthenticationTest extends TestCase
 {
     /** @var ServerRequestInterface&MockObject */
     private $request;
