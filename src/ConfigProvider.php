@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Mezzio\Authentication\LaminasAuthentication;
 
+/** @final */
 class ConfigProvider
 {
     public function __invoke(): array

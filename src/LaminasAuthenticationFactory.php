@@ -11,6 +11,7 @@ use Psr\Container\ContainerInterface;
 
 use function sprintf;
 
+/** @final */
 class LaminasAuthenticationFactory
 {
     use Psr17ResponseFactoryTrait;

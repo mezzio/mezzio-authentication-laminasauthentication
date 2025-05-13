@@ -15,6 +15,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use function is_callable;
 use function strtoupper;
 
+/** @final */
 class LaminasAuthentication implements AuthenticationInterface
 {
     /** @var AuthenticationService */

@@ -7,7 +7,7 @@ namespace MezzioTest\Authentication\LaminasAuthentication;
 use Mezzio\Authentication\LaminasAuthentication\ConfigProvider;
 use PHPUnit\Framework\TestCase;
 
-class ConfigProviderTest extends TestCase
+final class ConfigProviderTest extends TestCase
 {
     private ConfigProvider $provider;
 
