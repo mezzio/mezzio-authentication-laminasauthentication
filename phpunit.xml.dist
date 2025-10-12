@@ -3,24 +3,15 @@
          xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
          bootstrap="vendor/autoload.php"
          colors="true"
-         displayDetailsOnPhpunitDeprecations="true"
-         displayDetailsOnIncompleteTests="true"
-         displayDetailsOnSkippedTests="true"
-         displayDetailsOnTestsThatTriggerDeprecations="true"
-         displayDetailsOnTestsThatTriggerErrors="true"
-         displayDetailsOnTestsThatTriggerNotices="true"
-         displayDetailsOnTestsThatTriggerWarnings="true"
-         failOnDeprecation="true"
-         failOnNotice="true"
-         failOnWarning="true"
-         failOnPhpunitDeprecation="true"
+         displayDetailsOnAllIssues="true"
+         failOnAllIssues="true"
 >
     <testsuites>
         <testsuite name="mezzio-authentication-laminasauthentication">
             <directory>./test</directory>
         </testsuite>
     </testsuites>
-    <source>
+    <source ignoreIndirectDeprecations="true">
         <include>
             <directory suffix=".php">./src</directory>
         </include>
